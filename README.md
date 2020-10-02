@@ -38,7 +38,7 @@ const oidcConsole = require('oidc-client-console');
 
 ```
 git clone https://github.com/AlexF4Dev/oidc-client-console.git
-cd oidc-client-js-console
+cd oidc-client-console
 npm install
 npm run build
 ```
