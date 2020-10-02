@@ -1,11 +1,11 @@
-[![npm package](https://badge.fury.io/js/oidc-client-js-console.svg)](https://www.npmjs.com/package/oidc-client-js-console)
+[![npm package](https://badge.fury.io/js/oidc-client-console.svg)](https://www.npmjs.com/package/oidc-client-console)
 
-# oidc-client-js-console
+# oidc-client-console
 
-The library to provide OpenID Connect (OIDC) and OAuth2 protocol support for the console applications. 
-The library is an extension for [npm package](https://badge.fury.io/js/oidc-client.svg)](https://www.npmjs.com/package/oidc-client)
+The library provides OpenID Connect (OIDC) and OAuth2 protocol support for the console applications. 
+The library is an extension for [oidc-client](https://www.npmjs.com/package/oidc-client) to support console applications.
 
-The logged in user is stored encrypted in the 
+The logged in user is stored encrypted in the user profile directory with the encryption key stored by keytar [keytar](https://www.npmjs.com/package/keytar).
 
 
 ## Install
@@ -20,24 +20,17 @@ Node.js v4.4 or later required.
 
 ##### Using LIbrary
 ```
-import { UserManagerSettings } from 'oidc-client';
-import { getUser, appSettings } from 'oidc-client-js-console';
+const oidcConsole = require('oidc-client-js-console');
 
-// Used to name folder into profile directory
-appSettings.appName = 'oidc-console-app';
-// Port used by service to receive AUTH code
-appSettings.port = 5000;
-
-(async () => {
-    const config: Partial<UserManagerSettings> = {
-        authority: <authority url>,
-        client_id: <clientId>,
+(async function() {
+    const user = await oidcConsole.getUser({
+        authority: 'https://login.microsoftonline.com/<tenant>/',
+        client_id: '<clientId>',
         response_type: 'code',
         scope: 'openid profile email'
-    };
+    });
+    console.log(JSON.stringify(user));
 
-    const user = await getUser(config);
-    process.exit();
 })();
 ```
 
@@ -57,7 +50,7 @@ create .env file in root folder (Azure example):
 Create application in Azure with http://localhost:5000 callback url
 
 AUTHORITY=https://login.microsoftonline.com/<tenant>/
-CLIENT_ID=5b62f8ed-2940-4c88-b1c8-85b13e3cd7d6
+CLIENT_ID=<clientId>
 
 `npm start`
 
