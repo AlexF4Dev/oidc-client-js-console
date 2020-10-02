@@ -16,11 +16,11 @@ Node.js v4.4 or later required.
 
 ##### NPM
 
-`npm install oidc-client-js-console --save`
+`npm install oidc-client-console --save`
 
 ##### Using LIbrary
 ```
-const oidcConsole = require('oidc-client-js-console');
+const oidcConsole = require('oidc-client-console');
 
 (async function() {
     const user = await oidcConsole.getUser({
@@ -37,7 +37,7 @@ const oidcConsole = require('oidc-client-js-console');
 ## Building the Source
 
 ```
-git clone https://github.com/AlexF4Dev/oidc-client-js-console.git
+git clone https://github.com/AlexF4Dev/oidc-client-console.git
 cd oidc-client-js-console
 npm install
 npm run build
