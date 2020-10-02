@@ -49,8 +49,8 @@ create .env file in root folder (Azure example):
 
 Create application in Azure with http://localhost:5000 callback url
 
-AUTHORITY=https://login.microsoftonline.com/<tenant>/
-CLIENT_ID=<clientId>
+AUTHORITY=https://login.microsoftonline.com/TENANT/
+CLIENT_ID=CLIENTID
 
 `npm start`
 
