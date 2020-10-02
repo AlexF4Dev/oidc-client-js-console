@@ -1,6 +1,6 @@
 {
     "name": "oidc-client-console",
-    "version": "1.0.4",
+    "version": "1.0.5",
     "description": "OpenID Connect (OIDC) & OAuth2 for console",
     "keywords": [
         "auth",
@@ -37,15 +37,13 @@
     "license": "Apache-2.0",
     "author": "Alex Furman <alex.furman@live.com>",
     "dependencies": {
-        "@types/dotenv": "^8.2.0",
         "dotenv": "^8.2.0",
         "fs-extra": "^9.0.1",
         "keytar": "^6.0.1",
         "node-window-polyfill": "^1.0.0",
         "oidc-client": "^1.10.1",
-        "open": "^7.2.1",
-        "xmlhttprequest-ssl": "^1.6.0",
-        "zlib": "^1.0.5"
+        "open": "^7.3.0",
+        "xmlhttprequest-ssl": "^1.6.0"
     },
     "devDependencies": {
         "@types/fs-extra": "^9.0.1",
