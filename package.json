@@ -1,6 +1,6 @@
 {
     "name": "oidc-client-console",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "OpenID Connect (OIDC) & OAuth2 for console",
     "keywords": [
         "auth",

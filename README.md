@@ -19,12 +19,15 @@ Node.js v4.4 or later required.
 `npm install oidc-client-console --save`
 
 ##### Using LIbrary
+The library can be used with any OIDC provider Auth0, Azure AD, Okta, Keyclock etc.
+
+
 ```
 const oidcConsole = require('oidc-client-console');
 
 (async function() {
     const user = await oidcConsole.getUser({
-        authority: 'https://login.microsoftonline.com/<tenant>/',
+        authority: 'https://login.microsoftonline.com/<tenant>/v2.0',
         client_id: '<clientId>',
         response_type: 'code',
         scope: 'openid profile email'
@@ -49,8 +52,8 @@ create .env file in root folder (Azure example):
 
 Create application in Azure with http://localhost:5000 callback url
 ```
-AUTHORITY=https://login.microsoftonline.com/TENANT/
-CLIENT_ID=CLIENTID
+AUTHORITY=https://login.microsoftonline.com/<tenant>/v2.0
+CLIENT_ID=<clientId>
 ```
 
 `npm start`

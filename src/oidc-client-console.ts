@@ -15,6 +15,7 @@ export type Writeable<T> = { -readonly [P in keyof T]: T[P] };
 export class ConsoleSettings {
     public static init(settings: Writeable<oidc.UserManagerSettings>): void {
         settings.popupNavigator = new ConsolePopupNavigator();
+        settings.iframeNavigator = new ConsolePopupNavigator();
         settings.userStore = new UserStore();
 
         settings.filterProtocolClaims ??= true;
