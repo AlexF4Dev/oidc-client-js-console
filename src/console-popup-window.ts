@@ -32,6 +32,10 @@ export class ConsolePopupWindow {
                 res.setHeader('Content-Type', 'text/html');
                 res.writeHead(200);
                 res.end('<html><body><h2>You may close this page now</h2></body></html>');
+            } else if (req.url && req.url?.indexOf('.ico') > 0) {
+                res.setHeader('Content-Type', 'text/html');
+                res.writeHead(200);
+                res.end('<html><body></body></html>');
             } else {
                 res.setHeader('Content-Type', 'text/html');
                 res.writeHead(200);
