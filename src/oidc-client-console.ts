@@ -6,6 +6,7 @@ declare module 'oidc-client' {
 import nodeWindowPolyfill from 'node-window-polyfill';
 import { ConsolePopupNavigator } from './console-popup-navigator';
 import { UserStore } from './user-store';
+import { appSettings } from '.';
 
 nodeWindowPolyfill.register();
 oidc.Global.setXMLHttpRequest(XMLHttpRequest);
@@ -20,6 +21,6 @@ export class ConsoleSettings {
         settings.filterProtocolClaims ??= true;
         settings.loadUserInfo ??= true;
         settings.automaticSilentRenew ??= false;
-        settings.redirect_uri ??= 'http://localHost:5000';
+        settings.redirect_uri ??= `http://localHost:${appSettings.port}`;
     }
 }

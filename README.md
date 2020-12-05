@@ -37,6 +37,12 @@ const oidcConsole = require('oidc-client-console');
 })();
 ```
 
+## Global Settings
+```
+appSettings.appName = 'oidc-console-app'; //default
+appSettings.port = 5000; //default
+```
+
 ## Building the Source
 
 ```
