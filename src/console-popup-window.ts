@@ -6,7 +6,7 @@ import { ChildProcess } from 'child_process';
 import { appSettings } from '.';
 
 export class ConsolePopupWindow {
-    private thePromise: Promise<Event | string>;
+    private thePromise: Promise<Event | string | undefined>;
     private resolve: ((value?: Event | string) => void) | undefined;
     private reject: ((value?: Error) => void) | undefined;
     public features?: string;
@@ -46,7 +46,7 @@ export class ConsolePopupWindow {
         this.server.listen(this.port);
     }
 
-    public async navigate(params: UserManagerSettings & { url: string }): Promise<string | Event> {
+    public async navigate(params: UserManagerSettings & { url: string }): Promise<string | Event | undefined> {
         if (!params || !params.url) {
             this.error('No url provided');
         }
