@@ -1,6 +1,6 @@
 {
     "name": "oidc-client-console",
-    "version": "1.0.10",
+    "version": "1.0.11",
     "description": "OpenID Connect (OIDC) & OAuth2 for console",
     "keywords": [
         "auth",
@@ -24,7 +24,7 @@
     "bugs": {
         "url": "https://github.com/AlexF4Dev/oidc-client-js-console/issues"
     },
-    "scripts": { 
+    "scripts": {
         "start": "tsc && node  dist/examples/main.js",
         "build": "tsc",
         "prepare": "npm run build",
