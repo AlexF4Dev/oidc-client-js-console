@@ -8,15 +8,25 @@ import uuid = require('uuid');
 import { appSettings } from '.';
 
 export class UserStore implements StateStore {
-    private readonly _logger = new Logger("UserStore");
+    protected readonly _logger = new Logger("UserStore");
     
     readonly ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // Must be 256 bits (32 characters)
     readonly IV_LENGTH = 16; // For AES, this is always 16
-    readonly account = appSettings.appName ?? 'oidc-client-js-console';
+    readonly account = appSettings.appName ?? 'oidc-client-ts-console';
     readonly appPath = path.join(os.homedir(), '.' + appSettings.appName);
 
-    remove(key: string): Promise<string | null> {
-        return String(keytar.deletePassword(key, this.account)) as any;
+    async remove(key: string): Promise<string | null> {
+        try {
+            const password = await keytar.getPassword(key, this.account);
+            await fs.ensureDir(this.appPath);
+            const encrypted = await fs.readFile(path.join(this.appPath, Buffer.from(key).toString('base64')), 'utf8');
+            const decrypted = this.decrypt(encrypted, password);
+            await keytar.deletePassword(key, this.account);
+            return decrypted;
+        } catch (ex) {
+            this._logger.error('Failed to read user', ex);
+            return null;
+        }
     }
     async getAllKeys(): Promise<string[]> {
         return [];

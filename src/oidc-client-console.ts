@@ -1,14 +1,15 @@
-import { XMLHttpRequest } from 'xmlhttprequest-ssl';
 import * as oidc from 'oidc-client-ts';
 import nodeWindowPolyfill from 'node-window-polyfill';
 import { fetch_polyfill } from './fetch-polyfill';
 import { UserStore } from './user-store';
 import { appSettings } from '.';
 import { Log } from 'oidc-client-ts';
+import { ConsolePopupNavigator } from './console-popup-navigator';
 
 nodeWindowPolyfill.register();
-(globalThis as any).window = {
-    ...(globalThis as any).window ?? {},
+const global: any = globalThis;
+globalThis.window = {
+    ...global.window ?? {},
     ...{
       location: {
         origin: 'http://localhost:5000'
@@ -33,7 +34,7 @@ export class ConsoleSettings {
 }
 
 export class UserManagerConsole extends oidc.UserManager {
-    public constructor(settings: oidc.UserManagerSettings, popupNavigator: any) {
+    public constructor(settings: oidc.UserManagerSettings, popupNavigator: ConsolePopupNavigator) {
         super(settings);
         Object.assign(this, { _popupNavigator : popupNavigator});
     }

@@ -2,9 +2,6 @@ import * as dotenv from 'dotenv';
 import { getUser, appSettings } from '..';
 import { UserManagerSettings } from 'oidc-client-ts';
 
-
-
-
 dotenv.config();
 
 appSettings.appName = 'oidc-console-app';

@@ -5,10 +5,11 @@ import fetch, {
 } from 'node-fetch';
 
 export const fetch_polyfill = () => {
-  if (!globalThis.fetch) {
-    (globalThis as any).fetch = fetch;
-    (globalThis as any).Headers = Headers;
-    (globalThis as any).Request = Request;
-    (globalThis as any).Response = Response;
+  const global: any = globalThis;
+  if (!global.fetch) {
+    global.fetch = fetch;
+    global.Headers = Headers;
+    global.Request = Request;
+    global.Response = Response;
   }
 }
