@@ -40,8 +40,9 @@
         "dotenv": "^10.0.0",
         "fs-extra": "^10.0.0",
         "keytar": "^7.7.0",
+        "node-fetch": "^2.6.7",
         "node-window-polyfill": "^1.0.2",
-        "oidc-client": "^1.11.5",
+        "oidc-client-ts": "^2.0.5",
         "open": "^8.4.0",
         "uuid": "^8.3.2",
         "xmlhttprequest-ssl": "^2.0.0"
@@ -50,6 +51,7 @@
         "@types/fs-extra": "^9.0.13",
         "@types/keytar": "^4.4.2",
         "@types/node": "^16.11.7",
+        "@types/node-fetch": "^2.6.2",
         "@types/open": "^6.2.1",
         "@types/uuid": "^8.3.1",
         "@typescript-eslint/eslint-plugin": "^5.3.1",

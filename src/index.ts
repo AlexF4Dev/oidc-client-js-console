@@ -1,5 +1,6 @@
-import { User, UserManager, UserManagerSettings } from 'oidc-client';
-import { ConsoleSettings } from './oidc-client-console';
+import { User, UserManagerSettings } from 'oidc-client-ts';
+import { ConsolePopupNavigator } from './console-popup-navigator';
+import { ConsoleSettings, UserManagerConsole } from './oidc-client-console';
 
 export * from './oidc-client-console';
 
@@ -8,10 +9,10 @@ export const appSettings = {
     port: 5000
 };
 
-export async function getUser(settings: Partial<UserManagerSettings>): Promise<User | undefined> {
+export async function getUser(settings: UserManagerSettings): Promise<User | null> {
     ConsoleSettings.init(settings);
 
-    const userManager = new UserManager(settings);
+    const userManager = new UserManagerConsole(settings,  new ConsolePopupNavigator());
 
     let user = await userManager.getUser();
     try {
@@ -25,3 +26,5 @@ export async function getUser(settings: Partial<UserManagerSettings>): Promise<U
     }
     return user;
 }
+
+export { fetch_polyfill }  from './fetch-polyfill';

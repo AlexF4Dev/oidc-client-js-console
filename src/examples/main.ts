@@ -1,6 +1,9 @@
 import * as dotenv from 'dotenv';
-import { UserManagerSettings } from 'oidc-client';
 import { getUser, appSettings } from '..';
+import { UserManagerSettings } from 'oidc-client-ts';
+
+
+
 
 dotenv.config();
 
@@ -15,7 +18,7 @@ appSettings.port = 5000;
         scope: 'openid profile email'
     };
 
-    const user = await getUser(config);
+    const user = await getUser(config as any);
     console.log(JSON.stringify(user));
     console.log(`accessToken: ${user?.access_token}`);
 

@@ -1,5 +1,5 @@
 import keytar from 'keytar';
-import { StateStore, Log } from 'oidc-client';
+import { StateStore, Log, Logger } from 'oidc-client-ts';
 import crypto from 'crypto';
 import fs from 'fs-extra';
 import os from 'os';
@@ -8,13 +8,15 @@ import uuid = require('uuid');
 import { appSettings } from '.';
 
 export class UserStore implements StateStore {
+    private readonly _logger = new Logger("UserStore");
+    
     readonly ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // Must be 256 bits (32 characters)
     readonly IV_LENGTH = 16; // For AES, this is always 16
     readonly account = appSettings.appName ?? 'oidc-client-js-console';
     readonly appPath = path.join(os.homedir(), '.' + appSettings.appName);
 
-    remove(key: string): Promise<boolean> {
-        return keytar.deletePassword(key, this.account);
+    remove(key: string): Promise<string | null> {
+        return String(keytar.deletePassword(key, this.account)) as any;
     }
     async getAllKeys(): Promise<string[]> {
         return [];
@@ -27,7 +29,7 @@ export class UserStore implements StateStore {
             const decrypted = this.decrypt(encrypted, password);
             return decrypted;
         } catch (ex) {
-            Log.logger.error('Failed to read user', ex);
+            this._logger.error('Failed to read user', ex);
             return null;
         }
     }
@@ -38,7 +40,7 @@ export class UserStore implements StateStore {
         const encrypted = this.encrypt(value, guid);
         await fs.writeFile(path.join(this.appPath, Buffer.from(key).toString('base64')), encrypted);
         return keytar.setPassword(key, this.account, guid).catch((err) => {
-            console.log(`Failed to save to keytar: ${err} data length ${value.length}`);
+            this._logger.error(`Failed to save to keytar: ${err} data length ${value.length}`);
         });
     }
 

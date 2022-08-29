@@ -1,7 +1,7 @@
 import open from 'open';
 import { Event } from './types';
 import { IncomingMessage, ServerResponse, createServer, Server } from 'http';
-import { UserManagerSettings } from 'oidc-client';
+import { UserManagerSettings } from 'oidc-client-ts';
 import { ChildProcess } from 'child_process';
 import { appSettings } from '.';
 
