@@ -1,5 +1,5 @@
 import { ConsolePopupWindow } from './console-popup-window';
-import { UserManagerSettings } from 'oidc-client';
+import { UserManagerSettings } from 'oidc-client-ts';
 export class ConsolePopupNavigator {
     private popup?: ConsolePopupWindow;
 
