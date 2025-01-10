@@ -38,8 +38,8 @@ export class UserStore implements StateStore {
             const encrypted = await fs.readFile(path.join(this.appPath, Buffer.from(key).toString('base64')), 'utf8');
             const decrypted = this.decrypt(encrypted, password);
             return decrypted;
-        } catch (ex) {
-            this._logger.info('Failed to read user credentials', ex);
+        } catch  {
+            this._logger.info(`User credentials not found for account [${key}:${this.account}] at [${this.appPath}]`);
             return null;
         }
     }
