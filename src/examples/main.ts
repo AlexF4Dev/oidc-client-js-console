@@ -15,7 +15,7 @@ appSettings.port = 5000;
         scope: 'openid profile email'
     };
 
-    const user = await getUser(config as any);
+    const user = await getUser(config);
     console.log(JSON.stringify(user));
     console.log(`accessToken: ${user?.access_token}`);
 

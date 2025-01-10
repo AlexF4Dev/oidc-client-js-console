@@ -1,4 +1,3 @@
-import open from 'open';
 import { Event } from './types';
 import { IncomingMessage, ServerResponse, createServer, Server } from 'http';
 import { UserManagerSettings } from 'oidc-client-ts';
@@ -52,7 +51,9 @@ export class ConsolePopupWindow {
         }
 
         this.startService();
-        this.windowHandle = await open(params.url);
+        const open = await eval('import("open")');
+
+        this.windowHandle = await open.openApp(params.url);
 
         return this.thePromise;
     }
@@ -81,7 +82,7 @@ export class ConsolePopupWindow {
     }
 
     public isValidCodeFlowUri(url?: string): boolean {
-        const { code, session_state, state } = this.parseUrlFragment(url ?? '', '?');
+        const { code, state } = this.parseUrlFragment(url ?? '', '?');
         return !!code && !!state;
     }
 

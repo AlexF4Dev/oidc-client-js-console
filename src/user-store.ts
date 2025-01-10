@@ -1,5 +1,5 @@
 import keytar from 'keytar';
-import { StateStore, Log, Logger } from 'oidc-client-ts';
+import { StateStore, Logger } from 'oidc-client-ts';
 import crypto from 'crypto';
 import fs from 'fs-extra';
 import os from 'os';
@@ -39,7 +39,7 @@ export class UserStore implements StateStore {
             const decrypted = this.decrypt(encrypted, password);
             return decrypted;
         } catch (ex) {
-            this._logger.error('Failed to read user', ex);
+            this._logger.info('Failed to read user credentials', ex);
             return null;
         }
     }

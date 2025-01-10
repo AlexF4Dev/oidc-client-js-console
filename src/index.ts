@@ -9,10 +9,10 @@ export const appSettings = {
     port: 5000
 };
 
-export async function getUser(settings: UserManagerSettings): Promise<User | null> {
+export async function getUser(settings: Partial<UserManagerSettings>): Promise<User | null> {
     ConsoleSettings.init(settings);
 
-    const userManager = new UserManagerConsole(settings,  new ConsolePopupNavigator());
+    const userManager = new UserManagerConsole(settings as UserManagerSettings,  new ConsolePopupNavigator());
 
     let user = await userManager.getUser();
     try {
@@ -21,7 +21,7 @@ export async function getUser(settings: UserManagerSettings): Promise<User | nul
         } else if (!(user = await userManager.signinSilent())) {
             user = await userManager.signinPopup();
         }
-    } catch (ex) {
+    } catch  {
         user = await userManager.signinPopup();
     }
     return user;
