@@ -1,20 +1,32 @@
 import keytar from 'keytar';
-import { StateStore, Log } from 'oidc-client';
+import { StateStore, Logger } from 'oidc-client-ts';
 import crypto from 'crypto';
 import fs from 'fs-extra';
 import os from 'os';
 import path from 'path';
-import uuid = require('uuid');
+import * as uuid from 'uuid';
 import { appSettings } from '.';
 
 export class UserStore implements StateStore {
+    protected readonly _logger = new Logger("UserStore");
+    
     readonly ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // Must be 256 bits (32 characters)
     readonly IV_LENGTH = 16; // For AES, this is always 16
-    readonly account = appSettings.appName ?? 'oidc-client-js-console';
+    readonly account = appSettings.appName ?? 'oidc-client-ts-console';
     readonly appPath = path.join(os.homedir(), '.' + appSettings.appName);
 
-    remove(key: string): Promise<boolean> {
-        return keytar.deletePassword(key, this.account);
+    async remove(key: string): Promise<string | null> {
+        try {
+            const password = await keytar.getPassword(key, this.account);
+            await fs.ensureDir(this.appPath);
+            const encrypted = await fs.readFile(path.join(this.appPath, Buffer.from(key).toString('base64')), 'utf8');
+            const decrypted = this.decrypt(encrypted, password);
+            await keytar.deletePassword(key, this.account);
+            return decrypted;
+        } catch (ex) {
+            this._logger.error('Failed to read user', ex);
+            return null;
+        }
     }
     async getAllKeys(): Promise<string[]> {
         return [];
@@ -26,8 +38,8 @@ export class UserStore implements StateStore {
             const encrypted = await fs.readFile(path.join(this.appPath, Buffer.from(key).toString('base64')), 'utf8');
             const decrypted = this.decrypt(encrypted, password);
             return decrypted;
-        } catch (ex) {
-            Log.logger.error('Failed to read user', ex);
+        } catch  {
+            this._logger.info(`User credentials not found for account [${key}:${this.account}] at [${this.appPath}]`);
             return null;
         }
     }
@@ -38,7 +50,7 @@ export class UserStore implements StateStore {
         const encrypted = this.encrypt(value, guid);
         await fs.writeFile(path.join(this.appPath, Buffer.from(key).toString('base64')), encrypted);
         return keytar.setPassword(key, this.account, guid).catch((err) => {
-            console.log(`Failed to save to keytar: ${err} data length ${value.length}`);
+            this._logger.error(`Failed to save to keytar: ${err} data length ${value.length}`);
         });
     }
 

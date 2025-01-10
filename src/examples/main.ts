@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
-import { UserManagerSettings } from 'oidc-client';
 import { getUser, appSettings } from '..';
+import { UserManagerSettings } from 'oidc-client-ts';
 
 dotenv.config();
 

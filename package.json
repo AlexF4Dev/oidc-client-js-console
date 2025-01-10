@@ -1,6 +1,6 @@
 {
     "name": "oidc-client-console",
-    "version": "1.0.12",
+    "version": "1.0.14",
     "description": "OpenID Connect (OIDC) & OAuth2 for console",
     "keywords": [
         "auth",
@@ -37,28 +37,28 @@
     "license": "Apache-2.0",
     "author": "Alex Furman <alex.furman@live.com>",
     "dependencies": {
-        "dotenv": "^10.0.0",
-        "fs-extra": "^10.0.0",
-        "keytar": "^7.7.0",
-        "node-window-polyfill": "^1.0.2",
-        "oidc-client": "^1.11.5",
-        "open": "^8.4.0",
-        "uuid": "^8.3.2",
-        "xmlhttprequest-ssl": "^2.0.0"
+        "dotenv": "^16.4.7",
+        "fs-extra": "^11.2.0",
+        "keytar": "^7.9.0",
+        "node-window-polyfill": "^1.0.4",
+        "oidc-client-ts": "^3.1.0",
+        "open": "^10.1.0",
+        "uuid": "^11.0.5"
     },
     "devDependencies": {
-        "@types/fs-extra": "^9.0.13",
-        "@types/keytar": "^4.4.2",
-        "@types/node": "^16.11.7",
-        "@types/open": "^6.2.1",
-        "@types/uuid": "^8.3.1",
-        "@typescript-eslint/eslint-plugin": "^5.3.1",
-        "@typescript-eslint/parser": "^5.3.1",
-        "eslint": "^8.2.0",
-        "husky": "^7.0.4",
-        "lint-staged": "^11.2.6",
-        "prettier": "^2.4.1",
-        "typescript": "^4.4.4"
+        "@eslint/js": "^9.17.0",
+        "@types/fs-extra": "^11.0.4",
+        "@types/node": "^22.10.5",
+        "@types/uuid": "^10.0.0",
+        "@typescript-eslint/eslint-plugin": "^8.19.1",
+        "@typescript-eslint/parser": "^8.19.1",
+        "eslint": "^9.17.0",
+        "globals": "^15.14.0",
+        "husky": "^9.1.7",
+        "lint-staged": "^15.3.0",
+        "prettier": "^3.4.2",
+        "typescript": "^5.7.3",
+        "typescript-eslint": "^8.19.1"
     },
     "husky": {
         "hooks": {
