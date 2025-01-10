@@ -27,4 +27,3 @@ export async function getUser(settings: UserManagerSettings): Promise<User | nul
     return user;
 }
 
-export { fetch_polyfill }  from './fetch-polyfill';

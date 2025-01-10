@@ -1,6 +1,5 @@
 import * as oidc from 'oidc-client-ts';
 import nodeWindowPolyfill from 'node-window-polyfill';
-import { fetch_polyfill } from './fetch-polyfill';
 import { UserStore } from './user-store';
 import { appSettings } from '.';
 import { Log } from 'oidc-client-ts';
@@ -17,7 +16,6 @@ globalThis.window = {
     }
 }
 
-fetch_polyfill();
 
 Log.setLogger(console);
 

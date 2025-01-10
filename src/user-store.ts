@@ -4,7 +4,7 @@ import crypto from 'crypto';
 import fs from 'fs-extra';
 import os from 'os';
 import path from 'path';
-import uuid = require('uuid');
+import * as uuid from 'uuid';
 import { appSettings } from '.';
 
 export class UserStore implements StateStore {
