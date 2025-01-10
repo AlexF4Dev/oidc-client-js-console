@@ -53,7 +53,7 @@ export class ConsolePopupWindow {
         this.startService();
         const open = await eval('import("open")');
 
-        this.windowHandle = await open.openApp(params.url);
+        this.windowHandle = await open.default(params.url);
 
         return this.thePromise;
     }
